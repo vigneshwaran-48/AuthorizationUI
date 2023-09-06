@@ -46,6 +46,17 @@ const Accounts = () => {
                     onClick={ () => Common.closeErrorPopupForce() }
                 ></i>
             </div>
+            <div className="popup success-popup x-axis-flex">
+                <i className="fa fa-solid fa-check"></i>
+                <div className="popup-message">
+                    <p className="success-popup-para">Success message dddddddddd</p>
+                </div>
+                <i 
+                    className="bi bi-x" 
+                    id="popup-close-button"
+                    onClick={ () => Common.closeSuccessPopupForce() }
+                ></i>
+            </div>
             <header className="accounts-header x-axis-flex">
                 <img 
                     src={ Common.appIcon } 

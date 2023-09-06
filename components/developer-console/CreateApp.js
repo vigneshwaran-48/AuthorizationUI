@@ -20,10 +20,24 @@ export const createAppAction = async ({params, request}) => {
     const data = Object.fromEntries(formData);
 
     if(data) {
+        console.log('Havind data to submit ...');
         const response = await ClienAPI.createClientApp(data);
         if(response.ok) {
-            // Common
+            const data = await response.json();
+            return {
+                data,
+                status: Common.POST_SUCCESS
+            }
         }
+        else {
+            return {
+                status: Common.POST_ERROR
+            }
+        }
+    }
+    console.log("Not having data to submit ...");
+    return {
+        status: Common.IGNORE_ACTION
     }
 }
 const CreateApp = () => {
@@ -44,7 +58,19 @@ const CreateApp = () => {
     });
 
     const actionData = useActionData();
-    console.log(actionData);
+
+    if(actionData) {
+        console.log(actionData);
+        if(actionData.status === Common.POST_ERROR) {
+            Common.showErrorPopup("Error while creating client", 3);
+        }
+        else if(actionData.status === Common.POST_SUCCESS) {
+            Common.showSuccessPopup("Client created successfully", 3);
+        }
+        else {
+            console.log("Action data ignored ...");
+        }
+    }
 
     const handleChange = event => {
         const { name, value } = event.target;

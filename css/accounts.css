@@ -108,6 +108,14 @@
 .popup-message::-webkit-scrollbar {
     display: none;
 }
+.success-popup {
+    background-color: rgb(9, 189, 129);
+    color: white;
+}
+.error-popup {
+    background-color: red;
+    color: white;
+}
 @media screen and (max-width: 1020px) {
     .accounts-side-nav-wrapper {
         position: absolute;

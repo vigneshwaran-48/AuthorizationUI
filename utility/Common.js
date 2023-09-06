@@ -8,6 +8,7 @@ let closeOnFocusOutElems = [{
 const emailRegex = /^[\w\d]{5,15}@proapp\.com$/;
 const mobileRegex = /^[\d]{8,15}$/;
 let errorPopupTimeoutId = -1;
+let successPopupTimeoutId = -1;
 
 export const Common = {
 
@@ -99,9 +100,25 @@ export const Common = {
         }, 
         aliveDuration * 1000 );
     },
+    showSuccessPopup: ( errorMessage, aliveDuration ) => {
+
+        let successPopupElem = document.querySelector(".success-popup");
+        document.querySelector(".success-popup-para").innerText = errorMessage;
+        successPopupElem.classList.add("show-popup");
+
+        successPopupTimeoutId = setTimeout(
+        () => {
+            document.querySelector(".success-popup").classList.remove("show-popup");
+        }, 
+        aliveDuration * 1000 );
+    },
     closeErrorPopupForce: () => {
         document.querySelector(".error-popup").classList.remove("show-popup");
         clearTimeout(errorPopupTimeoutId);
+    },
+    closeSuccessPopupForce: () => {
+        document.querySelector(".success-popup").classList.remove("show-popup");
+        clearTimeout(successPopupTimeoutId);
     },
     loginPopup: show => {
         if(show) {
@@ -113,5 +130,8 @@ export const Common = {
     },
     checkAndGiveDoubleDigit: value => {
         return value.length <= 1 ? "0" + value : value
-    }
+    },
+    POST_ERROR: 500,
+    POST_SUCCESS: 200,
+    IGNORE_ACTION: 1
 }
