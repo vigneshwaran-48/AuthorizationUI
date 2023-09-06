@@ -1,0 +1,155 @@
+.developer-console {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.developer-console-page {
+    height: calc(100% - 40px);
+    width: 100%;
+    overflow: scroll;
+}
+.developer-console-nav {
+    padding: 10px 0px;
+    width: 100%;
+}
+.developer-console-nav-child {
+    text-decoration: none;
+    color: black;
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 7px;
+    transition: 0.5s;
+    font-size: 16px;
+}
+.active-developer-console-nav-child {
+    background-color: rgb(96, 98, 105);
+    color: white;
+}
+
+.developer-console-child {
+    width: 100%;
+    height: 100%;
+    box-shadow: 1px 1px 7px rgb(0, 0, 0, 0.14);
+    overflow: scroll;
+    padding: 10px;
+    border-radius: 7px;
+}
+.developer-console-child::-webkit-scrollbar, .developer-console-page::-webkit-scrollbar {
+    display: none;
+}
+
+.client-app-input-wrapper {
+    max-width: 500px;
+    margin: 20px 0px;
+}
+.client-app-input-wrapper > input {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 10px 0px;
+    font-size: 20px;
+}
+.client-app-create-button {
+    max-width: 250px;
+    background-color: rgb(96, 98, 105);
+    color: white;
+}
+.animation-wrapper-div {
+    height: calc(100% - 50px);
+    padding: 0px 2px;
+    border-radius: 7px;
+}
+
+.developer-console-list-app {
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+}
+.client-app {
+    width: 250px;
+    height: 250px;
+    border-radius: 7px;
+    box-shadow: 1px 1px 7px rgb(0, 0, 0, 0.14);
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 10px;
+    margin-top: 10px;
+    position: relative;
+    text-decoration: none;
+    color: black;
+}
+.client-app > img {
+    width: 180px;
+}
+.client-app > h2 {
+    width: 75%;
+    overflow: scroll;
+    text-align: center;
+}
+.client-app > h2::-webkit-scrollbar {
+    display: none;
+}
+.client-app > i {
+    position: absolute;
+    left: 90%;
+    bottom: 90%;
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+@media screen and (max-width: 1606px)  {
+    .developer-console-list-app {
+        grid-template-columns: auto auto auto auto;
+    }
+}
+@media screen and (max-width: 1350px)  {
+    .developer-console-list-app {
+        grid-template-columns: auto auto auto;
+    }
+}
+@media screen and (max-width: 1085px)  {
+    .developer-console-list-app {
+        grid-template-columns: auto auto;
+    }
+}
+@media screen and (max-width: 1020px)  {
+    .developer-console-list-app {
+        grid-template-columns: auto auto auto;
+    }
+}
+@media screen and (max-width: 1020px)  {
+    .developer-console-list-app {
+        grid-template-columns: auto auto auto;
+    }
+}
+@media screen and (max-width: 830px)  {
+    .developer-console-list-app {
+        grid-template-columns: auto auto;
+    }
+}
+@media screen and (max-width: 830px)  {
+    .developer-console-list-app {
+        grid-template-columns: auto auto;
+    }
+}
+@media screen and (max-width: 565px)  {
+    .developer-console-list-app {
+        grid-template-columns: auto ;
+    }
+}
+@media screen and (max-width: 310px)  {
+    .client-app {
+        width: 210px;
+        margin-right: 0px;
+    }
+}

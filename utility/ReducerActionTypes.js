@@ -1,0 +1,6 @@
+export const AppActionTypes = {
+    LOGOUT: "LOGOUT",
+    UPDATE_USER: "UPDATE_USER",
+    CHANGE_THEME: "CHANGE_THEME",
+    POPULATE_ROUTES: "POPULATE_ROUTES"
+}

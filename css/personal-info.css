@@ -1,0 +1,101 @@
+.personal-info {
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+.personal-info > h1 {
+    width: 100%;
+    text-align: left;
+}
+.user-info-page {
+    width: 100%;
+    /* align-items: center; */
+    overflow: scroll;
+    margin-top: 10px;
+    align-items: flex-start;
+}
+.user-info-page::-webkit-scrollbar {
+    display: none;
+}
+.user-info-image-container {
+    width: 100px;
+    min-height: 100px;
+    border-radius: 50%;
+    background-color: rgb(240,243,245);
+    position: relative;
+    margin-left: 10px;
+}
+.user-info-image {
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    position: absolute;
+    border-radius: 50%; 
+}
+
+.user-account-form {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 48% 48%;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.accounts-input-wrapper {
+    max-width: 500px;
+    margin: 20px 0px;
+}
+.accounts-input-wrapper > input {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 10px 0px;
+    font-size: 20px;
+}
+.user-date-wrapper {
+    padding-top: 10px;
+}
+.user-dob-setting {
+    font-size: 18px;
+}
+
+.personal-info-update-button {
+    background-color: rgb(96, 98, 105);
+    color: white;
+    margin-top: 20px;
+    max-width: 500px;
+}
+
+.profile-image-upload-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    border-radius: 50%; 
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.5s;
+}
+.profile-image-upload-overlay > input {
+    display: none;
+}
+.profile-image-upload-overlay > label > img {
+    width: 40px;
+}
+.user-info-image-container:hover > .profile-image-upload-overlay {
+    opacity: 1;
+}
+@media screen and (max-width: 500px) {
+    
+    .user-account-form {
+        grid-template-columns: 100%;
+    }
+    .user-info-page {
+        align-items: center;
+    }
+    .user-info-image-container {
+        margin-left: 0px;
+    }
+}
