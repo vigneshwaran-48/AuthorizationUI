@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Common } from "../../utility/Common";
-import { Form, useActionData } from "react-router-dom";
+import { Form, redirect, useNavigation } from "react-router-dom";
 import RequireAuth from "../../utility/RequireAuth";
 import { ClienAPI } from "../../api/ClientAPI";
 
@@ -20,36 +20,20 @@ export const createAppAction = async ({params, request}) => {
     const data = Object.fromEntries(formData);
 
     if(data) {
-        console.log('Havind data to submit ...');
         const response = await ClienAPI.createClientApp(data);
         if(response.ok) {
             const data = await response.json();
-            return {
-                data,
-                status: Common.POST_SUCCESS
-            }
+            Common.showSuccessPopup("Client created successfully", 3);
+            return redirect("../list/" + data.clientId);
         }
         else {
-            return {
-                status: Common.POST_ERROR
-            }
+            Common.showErrorPopup("Error while creating client", 3);
         }
     }
-    console.log("Not having data to submit ...");
-    return {
-        status: Common.IGNORE_ACTION
-    }
+    return null;
 }
 const CreateApp = () => {
 
-    const [ formData, setFormData ] = useState({
-        clientName: "",
-        clientSecret: "",
-        scopes: "",
-        redirectUris: "",
-        path: ""
-    });
-    
     const [ fieldState, setFieldState ] = useState({
         clientName: true,
         clientSecret: true,
@@ -57,20 +41,7 @@ const CreateApp = () => {
         redirectUris: true,
     });
 
-    const actionData = useActionData();
-
-    if(actionData) {
-        console.log(actionData);
-        if(actionData.status === Common.POST_ERROR) {
-            Common.showErrorPopup("Error while creating client", 3);
-        }
-        else if(actionData.status === Common.POST_SUCCESS) {
-            Common.showSuccessPopup("Client created successfully", 3);
-        }
-        else {
-            console.log("Action data ignored ...");
-        }
-    }
+    const navigation = useNavigation();
 
     const handleChange = event => {
         const { name, value } = event.target;
@@ -80,12 +51,7 @@ const CreateApp = () => {
             !Common.checkLength(value, Common.minNameLength, maxLengthObj.name)) {
             fieldStateValue= false;
         }
-        setFormData(prevFormData => {
-            return {
-                ...prevFormData,
-                [ name ]: value
-            }
-        });
+       
         setFieldState(prevState => {
             return {
                 ...prevState,
@@ -102,12 +68,12 @@ const CreateApp = () => {
             <Form 
                 className="client-app-create-form y-axis-flex"
                 method="post"
+                replace
             >
                 <div className="client-app-input-wrapper">
                     <label>App Name</label>
                     <input 
                         name="clientName"
-                        value={formData.clientName}
                         placeholder="App name"
                         onChange={ handleChange }
                         style={{
@@ -120,7 +86,6 @@ const CreateApp = () => {
                     <input 
                         name="clientSecret"
                         type="password"
-                        value={formData.clientSecret}
                         placeholder="Secret"
                         onChange={ handleChange }
                         style={{
@@ -132,7 +97,6 @@ const CreateApp = () => {
                     <label>Scopes</label>
                     <input 
                         name="scopes"
-                        value={formData.scopes}
                         placeholder="openid,Todo.read,..."
                         onChange={ handleChange }
                         style={{
@@ -144,7 +108,6 @@ const CreateApp = () => {
                     <label>Redirect URIs</label>
                     <input 
                         name="redirectUris"
-                        value={ formData.redirectUris }
                         placeholder="https://proapp-client.com/home"
                         onChange={ handleChange }
                         style={{
@@ -153,10 +116,11 @@ const CreateApp = () => {
                         }}
                     />
                 </div>
-                <input hidden name="path" value={formData.path} />
+                <input hidden name="path" />
                 <button 
                     className="common-button client-app-create-button"
-                >Create</button>
+                    disabled={navigation.state === "submitting"}
+                >{navigation.state === "submitting" ? "Submitting" : "Create"}</button>
             </Form>
         </div>
     )

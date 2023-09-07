@@ -30,6 +30,6 @@ export const ClienAPI = {
                                         "Content-Type": "application/json"
                                     }
                                 });
-        return response;
+        return await response.json();
     }
 }
