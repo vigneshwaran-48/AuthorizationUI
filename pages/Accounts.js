@@ -8,14 +8,8 @@ import { ServerAPIManager } from "../utility/AppRoutes";
 
 
 export const accountsLoader = async ({ params }) => {
-    const response = await fetch("/api/utility/get-routes");
-    let data = Response.error();
-
-    if(response.ok) {
-        data = await response.json();
-        ServerAPIManager.populateRoutes(data);
-    }
-    return data;
+    
+    return Common.IGNORE_ACTION;
 }
 const Accounts = () => {
 

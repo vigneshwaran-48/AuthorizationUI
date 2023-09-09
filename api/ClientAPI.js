@@ -31,5 +31,18 @@ export const ClienAPI = {
                                     }
                                 });
         return await response.json();
+    },
+    deleteClientById: async id => {
+        const routes = await ServerAPIManager.getAppRoutes();
+        const url = routes.client.base + "/" + id;
+        const csrfToken = Cookies.get("XSRF-TOKEN");
+
+        const response = await fetch(url, {
+                                    method: "DELETE",
+                                    headers: {
+                                        "X-XSRF-TOKEN": csrfToken
+                                    },
+                                });
+        return response;
     }
 }

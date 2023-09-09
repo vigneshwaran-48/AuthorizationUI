@@ -15,11 +15,12 @@ import PersonalInfo, {
     personalInfoLoader }  
 from "./components/PersonalInfo";
 import DeveloperConsole, { developerLoaderData }  from "./components/DeveloperConsole";
-import ListApps, { listAppsLoader }  from "./components/developer-console/ListApps";
+import ListApps, { listAppsAction, listAppsLoader }  from "./components/developer-console/ListApps";
 import CreateApp, { createAppAction }  from "./components/developer-console/CreateApp.js";
 import UpdateApp  from "./components/developer-console/UpdateApp";
 import { AppProvider } from "./AppProvider";
 import ClientAppSingleView from "./components/developer-console/ClientAppSingleView";
+import Loading from "./utility/Loading";
 
 const route = createBrowserRouter(
     createRoutesFromElements(
@@ -49,6 +50,7 @@ const route = createBrowserRouter(
                     path="list" 
                     element={<ListApps />}
                     loader={listAppsLoader}
+                    action={listAppsAction}
                 />
                 <Route 
                     path="list/:id" 
@@ -83,7 +85,9 @@ const App = () => {
     return (
         <AppProvider>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <RouterProvider router={route} />
+                <React.Suspense fallback={<Loading />}>
+                    <RouterProvider router={route} />
+                </React.Suspense>
             </LocalizationProvider>
         </AppProvider>
     );
