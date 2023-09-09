@@ -5,6 +5,7 @@ import ClientApp from "./ClientApp";
 import { Link, useSubmit } from "react-router-dom";
 import Loading from "../../utility/Loading";
 import { Common } from "../../utility/Common";
+import NothingToShow from "../../utility/NothingToShow";
 
 export const listAppsLoader = ({ params }) => {
     return defer({clients : ClienAPI.getClientsOfUser()});
@@ -74,9 +75,25 @@ const ListApps = () => {
                                     )
                                 })
                                 : null;
+
+        const isClientsAvailable = clientAppElems?.length;
+
         return (
-            <div className="developer-console-list-app x-axis-flex">
-                {clientAppElems || <h1>You have no client apps</h1>}
+            <div 
+                className="developer-console-list-app x-axis-flex"
+                style={{
+                    display: isClientsAvailable ? "grid" : "flex",
+                }}
+            >
+                { isClientsAvailable
+                    ? clientAppElems 
+                    : <NothingToShow 
+                        message="You don't have any client apps yet" 
+                        optionalElems={<Link 
+                                        to="../create" 
+                                        className="common-button create-client-app-button"
+                                        >Create an app</Link>}
+                      />}
             </div>
         )
     }

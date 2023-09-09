@@ -128,5 +128,6 @@ export const Common = {
     },
     POST_ERROR: 500,
     POST_SUCCESS: 200,
-    IGNORE_ACTION: 1
+    IGNORE_ACTION: 1,
+    defaultNothingImage: "/nothing-here.png"
 }

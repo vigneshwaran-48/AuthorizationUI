@@ -144,7 +144,11 @@
 .client-app:hover {
     transform: scale(1.1);
 }
-
+.create-client-app-button {
+    background-color: rgb(96,98,105);
+    color: white;
+    margin-top: 10px;
+}
 
 
 @media screen and (max-width: 1606px)  {

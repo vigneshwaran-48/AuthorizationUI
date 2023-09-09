@@ -5,6 +5,9 @@ export const appReducerInitialState = {
     routes: {},
     preferences: {
         theme: ThemeConstants.LIGHT_THEME
+    },
+    user: {
+        image: "/person.png"
     }
 }
 
@@ -37,6 +40,13 @@ export const appReducer = (state, action) => {
                 preferences: {
                     ...state.preferences,
                     theme: payload.preferences.theme
+                }
+            }
+        case AppActionTypes.UPDATE_USER:
+            return {
+                ...state,
+                user: {
+                    image: payload.user.image
                 }
             }
         default:
