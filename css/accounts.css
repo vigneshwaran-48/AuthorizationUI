@@ -37,6 +37,7 @@
     border-radius: 10px;
     transition: 0.5s;
     z-index: 20;
+    position: relative;
 }
 .accounts-side-nav {
     text-decoration: none;
@@ -116,6 +117,19 @@
     background-color: red;
     color: white;
 }
+
+.logout-button {
+    background-color: red;
+    color: white;
+    position: absolute;
+    bottom: 0px;
+    justify-content: flex-start;
+}
+.logout-button > i {
+    margin-right: 7px;
+    font-size: 20px;
+    color: white;
+}
 @media screen and (max-width: 1020px) {
     .accounts-side-nav-wrapper {
         position: absolute;
@@ -166,6 +180,9 @@
     }
     .accounts-side-nav > i {
         margin-right: 0;
+    }
+    .logout-button {
+        position: static;
     }
 } 
 

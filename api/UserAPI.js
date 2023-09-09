@@ -64,5 +64,15 @@ export const UserAPI = {
                                     body: formData
                                 });
         return response;                        
+    },
+    logout: async () => {
+        const csrfToken = Cookies.get("XSRF-TOKEN");
+        const response = await fetch("/logout", {
+                                    method: "POST",
+                                    headers: {
+                                        "X-XSRF-TOKEN": csrfToken
+                                    } 
+                                });
+        return response;
     }
 }
