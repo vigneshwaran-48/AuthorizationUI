@@ -172,13 +172,14 @@ body, html, #root {
     border-radius: 50%;
 }
 
-.error-comp {
+.error-comp, .error404-wrapper {
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
+    text-align: center;
 }
-.error-comp > img {
+.error-comp > img, .error404-wrapper > img {
     max-width: 400px;
     width: 90%;
 }

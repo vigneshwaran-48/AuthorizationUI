@@ -5,7 +5,7 @@ import Loading from '../../utility/Loading';
 import { Common } from '../../utility/Common';
 import BackButton from '../../utility/BackButton';
 import { Form } from 'react-router-dom';
-import ErrorComp from '../../utility/ErrorComp';
+import Error404 from '../../utility/Error404';
 
 export const clientAppSingleViewLoader = ({params}) => {
   const response = ClienAPI.getClient(params.id);
@@ -90,7 +90,7 @@ const ClientAppSingleView = () => {
       <Suspense fallback={<Loading />}>
         <Await 
           resolve={clientsLoaderData.client}
-          errorElement={<ErrorComp />}
+          errorElement={<Error404 />}
         >
           {renderClient}
         </Await>

@@ -109,7 +109,6 @@ const PersonalInfo = () => {
 
     const handleImageChange = async event => {
         const file = event.target.files[0];
-        console.log(file);
 
         const formData = new FormData();
         formData.append("profileImage", file);

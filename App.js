@@ -21,6 +21,7 @@ import { AppProvider } from "./AppProvider";
 import ClientAppSingleView, { clientAppSingleViewAction, clientAppSingleViewLoader } from "./components/developer-console/ClientAppSingleView";
 import Loading from "./utility/Loading";
 import ErrorComp from "./utility/ErrorComp";
+import Error404 from "./utility/Error404";
 
 const route = createBrowserRouter(
     createRoutesFromElements(
@@ -70,7 +71,9 @@ const route = createBrowserRouter(
                     action={createAppAction}
                     errorElement={<ErrorComp />}
                 />
+                <Route path="*" element={<Error404 />} />
             </Route>
+            <Route path="*" element={<Error404 />} />
         </Route>
     )
 )
