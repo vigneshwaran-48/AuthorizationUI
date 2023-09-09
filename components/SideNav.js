@@ -1,8 +1,16 @@
 import React from "react";
 import { Common } from "../utility/Common";
 import { NavLink } from "react-router-dom";
+import { UserAPI } from "../api/UserAPI";
 
 const SideNav = ({ className }) => {
+
+    const handleLogout = async () => {
+        const response = await UserAPI.logout();
+        if(response.ok) {
+            window.location.href = "http://localhost:9090/logout";
+        }
+    }
     
     const navElems = Common.accountsSideNav.map(sideNav => {
         return (
@@ -21,6 +29,18 @@ const SideNav = ({ className }) => {
         )
     });
 
+    const logoutButton = (
+        <button 
+            className="common-button accounts-side-nav logout-button x-axis-flex"
+            onClick={handleLogout}
+        >
+            <i className="bi bi-box-arrow-left"></i>
+            <p className="hide-on-mobile">Logout</p>
+        </button>
+    );
+
+    navElems.push(logoutButton);
+   
     const checkForToggle = event => {
         event.stopPropagation();
     }
@@ -31,6 +51,7 @@ const SideNav = ({ className }) => {
             onClick={checkForToggle}
         >
             { navElems }
+            
         </nav>  
     );
 }

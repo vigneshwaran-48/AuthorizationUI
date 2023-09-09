@@ -13,11 +13,8 @@ export const homeLoader = async ({ params }) => {
     return UserAPI.getCurrentUserDetails();
 }
 const Home = () => {
-
-    // const app = useApp();
     
     const loaderData = useLoaderData();
-    console.log(loaderData);
 
     if(!loaderData) {
         return <Loading />

@@ -9,6 +9,7 @@ import { UserAPI } from "../api/UserAPI";
 import { useLoaderData } from "react-router";
 import Loading from "../utility/Loading";
 import { Form } from "react-router-dom";
+import useApp from "../AppProvider";
 
 export const personalInfoLoader = async ({ params }) => {
     await RequireAuth();
@@ -75,6 +76,8 @@ const PersonalInfo = () => {
 
     const [ profileImage, setProfileImage ] = useState("app-icon.png");
 
+    const app = useApp();
+
     useEffect(() => {
 
         loaderData?.user && setUserDetails({
@@ -86,7 +89,8 @@ const PersonalInfo = () => {
                         dob: loaderData.user.dob,
                         id: loaderData.user.id || -1
                       });
-        setProfileImage(loaderData.user.profileImage || "/app-icon.png");
+        app.updateUserImage(loaderData.user.profileImage || "/person.png");
+        setProfileImage(loaderData.user.profileImage || "/person.png");
     }, [ profileImage ]);
 
     if(!loaderData) {
@@ -105,7 +109,6 @@ const PersonalInfo = () => {
 
     const handleImageChange = async event => {
         const file = event.target.files[0];
-        console.log(file);
 
         const formData = new FormData();
         formData.append("profileImage", file);
@@ -114,11 +117,11 @@ const PersonalInfo = () => {
 
         const response = await UserAPI.uploadImage(formData, userDetails.id)
         if(response.ok) {
-            console.log("Image uploaded successfully");
+            Common.showSuccessPopup("Image uploaded successfully!", 2);
             setProfileImage(userDetails.profileImage);
         }
         else {
-            console.log("Image not uploaded");
+            Common.showErrorPopup("Oops! Something went wrong", 2);
         }
     }
 

@@ -79,18 +79,21 @@ body, html, #root {
 .login-form > div, .login-comp > div {
     margin-bottom: 20px;
 }
+.input-wrapper {
+    max-width: 500px;
+    margin: 20px 0px;
+}
 .input-wrapper > label {
     font-size: 20px;
 
 }
 .input-wrapper > input {
+    width: 100%;
     border: none;
     outline: none;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 10px 0px;
     font-size: 20px;
-    padding: 10px;
-    margin-top: 5px;
 }
 .login-button {
     background-color: black;
@@ -128,6 +131,63 @@ body, html, #root {
     width: 100%;
     height: 100%;
 }
+
+.back-button-comp {
+    color: white;
+    background-color: rgb(0,87,156);
+    padding: 7px;
+    border-radius: 7px;
+    width: fit-content;
+}
+.form {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 48% 48%;
+    justify-content: space-around;
+    margin-top: 20px;
+    height: fit-content;
+}
+.nothing-to-show-comp {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.nothing-to-show-comp > img {
+    max-width: 550px;
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+.top-user-image-container {
+    flex-grow: 1;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-end;
+}
+.top-user-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.error-comp, .error404-wrapper {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+.error-comp > img, .error404-wrapper > img {
+    max-width: 400px;
+    width: 90%;
+}
+.refresh-button {
+    background-color: rgb(96,98,105);
+    color: white;
+}
+
 @media screen and (max-width: 910px) {
     
     .credential-left-part {
@@ -138,5 +198,10 @@ body, html, #root {
     }
     .login-form, .login-comp-head, .sign-up-head {
         width: 100%;
+    }
+}
+@media screen and (max-width: 500px) {
+    .form {
+        grid-template-columns: 100%;
     }
 }

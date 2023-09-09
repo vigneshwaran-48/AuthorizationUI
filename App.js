@@ -15,11 +15,13 @@ import PersonalInfo, {
     personalInfoLoader }  
 from "./components/PersonalInfo";
 import DeveloperConsole, { developerLoaderData }  from "./components/DeveloperConsole";
-import ListApps, { listAppsLoader }  from "./components/developer-console/ListApps";
+import ListApps, { listAppsAction, listAppsLoader }  from "./components/developer-console/ListApps";
 import CreateApp, { createAppAction }  from "./components/developer-console/CreateApp.js";
-import UpdateApp  from "./components/developer-console/UpdateApp";
 import { AppProvider } from "./AppProvider";
-import ClientAppSingleView from "./components/developer-console/ClientAppSingleView";
+import ClientAppSingleView, { clientAppSingleViewAction, clientAppSingleViewLoader } from "./components/developer-console/ClientAppSingleView";
+import Loading from "./utility/Loading";
+import ErrorComp from "./utility/ErrorComp";
+import Error404 from "./utility/Error404";
 
 const route = createBrowserRouter(
     createRoutesFromElements(
@@ -27,40 +29,51 @@ const route = createBrowserRouter(
             path="/" 
             element={<Accounts />}
             loader={accountsLoader}
+            errorElement={<ErrorComp />}
         >
             <Route 
                 index 
                 element={<Home />} 
-                loader={homeLoader}        
+                loader={homeLoader}   
+                errorElement={<ErrorComp />}     
             />
             <Route
                 path="personal-info" 
                 element={<PersonalInfo />}
                 loader={personalInfoLoader}
                 action={personalInfoAction}
+                errorElement={<ErrorComp />}
             />
             <Route 
                 path="developer-console" 
                 element={<DeveloperConsole />}
                 loader={developerLoaderData}
+                errorElement={<ErrorComp />}
             >
                 <Route index element={<Navigate to="list" />} />
                 <Route 
                     path="list" 
                     element={<ListApps />}
                     loader={listAppsLoader}
+                    action={listAppsAction}
+                    errorElement={<ErrorComp />}
                 />
                 <Route 
                     path="list/:id" 
                     element={<ClientAppSingleView />}
+                    loader={clientAppSingleViewLoader}
+                    action={clientAppSingleViewAction}
+                    errorElement={<ErrorComp />}
                 />
                 <Route 
                     path="create" 
                     element={<CreateApp />}
                     action={createAppAction}
+                    errorElement={<ErrorComp />}
                 />
-                <Route path="update" element={<UpdateApp />} />
+                <Route path="*" element={<Error404 />} />
             </Route>
+            <Route path="*" element={<Error404 />} />
         </Route>
     )
 )
@@ -83,7 +96,9 @@ const App = () => {
     return (
         <AppProvider>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <RouterProvider router={route} />
+                <React.Suspense fallback={<Loading />}>
+                    <RouterProvider router={route} />
+                </React.Suspense>
             </LocalizationProvider>
         </AppProvider>
     );

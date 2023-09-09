@@ -18,7 +18,7 @@ export const ServerAPIManager = {
         appRoutes = routes;
     },
     getAppRoutes: async () => {
-        if(!appRoutes.client) {
+        if(!appRoutes || !Object.keys(appRoutes).length) {
 
             const response = await fetch("/api/utility/get-routes");
             const data = await response.json();

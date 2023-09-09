@@ -1,29 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Common } from "../utility/Common";
 import "../css/accounts.css";
 import SideNav from "../components/SideNav";
 import { Outlet, useLoaderData } from "react-router";
+import { UserAPI } from "../api/UserAPI";
 import useApp from "../AppProvider";
-import { ServerAPIManager } from "../utility/AppRoutes";
 
 
 export const accountsLoader = async ({ params }) => {
-    const response = await fetch("/api/utility/get-routes");
-    let data = Response.error();
-
-    if(response.ok) {
-        data = await response.json();
-        ServerAPIManager.populateRoutes(data);
-    }
-    return data;
+    return UserAPI.getCurrentUserDetails();
 }
 const Accounts = () => {
 
     const [ isSideNavOpen, setIsSideNavOpen ] = useState(false);
+    const profileImageTag = useRef();
 
+    const loaderData = useLoaderData();
+    const app = useApp();
+    
     const toggleNavBar = event => {
         event.stopPropagation();
         setIsSideNavOpen(prevIsSideNavOpen => !prevIsSideNavOpen);
+    }
+
+    const handleProfileImageChange = image => {
+        profileImageTag.current.src = image;
     }
 
     useEffect(() => {
@@ -31,7 +32,13 @@ const Accounts = () => {
             setIsSideNavOpen(false);
         }, [ "accounts-header-app-icon-id" ]);
 
+        app.listenToProfileImageChange(handleProfileImageChange);
+        
     }, []);
+
+    if(loaderData?.user && app.info.user.image === "/person.png") {
+        app.updateUserImage(loaderData.user.profileImage);
+    }
     
     return (
         <div className="accounts y-axis-flex">
@@ -46,6 +53,17 @@ const Accounts = () => {
                     onClick={ () => Common.closeErrorPopupForce() }
                 ></i>
             </div>
+            <div className="popup success-popup x-axis-flex">
+                <i className="fa fa-solid fa-check"></i>
+                <div className="popup-message">
+                    <p className="success-popup-para">Success message dddddddddd</p>
+                </div>
+                <i 
+                    className="bi bi-x" 
+                    id="popup-close-button"
+                    onClick={ () => Common.closeSuccessPopupForce() }
+                ></i>
+            </div>
             <header className="accounts-header x-axis-flex">
                 <img 
                     src={ Common.appIcon } 
@@ -55,6 +73,13 @@ const Accounts = () => {
                     onClick={ toggleNavBar }
                 />
                 <h2>{ Common.appName }</h2>
+                <div className="top-user-image-container x-axis-flex">
+                    <img 
+                        src={ app.info.user.image } 
+                        ref={profileImageTag}
+                        className="top-user-image"
+                        alt="user" />
+                </div>
             </header>
             <div className="accounts-bottom x-axis-flex">
                 <SideNav className={

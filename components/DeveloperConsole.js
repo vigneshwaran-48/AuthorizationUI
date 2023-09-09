@@ -55,6 +55,7 @@ const DeveloperConsole = () => {
             <h1>Developer Console</h1>
 
             <div className="developer-console-page y-axis-flex">
+            
                 <nav className="developer-console-nav x-axis-flex">
                     { navElems } 
                 </nav>
@@ -65,7 +66,7 @@ const DeveloperConsole = () => {
                     exit={{ opacity: 0 }}
                     transition={{duration: 0.5, ease: easeInOut}}
                     className="animation-wrapper-div"
-            >
+                >
                     <Outlet />
                 </motion.div>
             </div>
