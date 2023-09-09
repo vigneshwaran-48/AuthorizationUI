@@ -6,6 +6,7 @@ import { Link, useSubmit } from "react-router-dom";
 import Loading from "../../utility/Loading";
 import { Common } from "../../utility/Common";
 import NothingToShow from "../../utility/NothingToShow";
+import ErrorComp from "../../utility/ErrorComp";
 
 export const listAppsLoader = ({ params }) => {
     return defer({clients : ClienAPI.getClientsOfUser()});
@@ -103,7 +104,10 @@ const ListApps = () => {
     return (
         <div className="developer-console-child x-axis-flex">
             <Suspense fallback={<Loading />}>
-                <Await resolve={clientsLoaderData.clients}>
+                <Await 
+                    resolve={clientsLoaderData.clients}
+                    errorElement={<ErrorComp />}
+                >
                     {renderClients}
                 </Await>
             </Suspense>

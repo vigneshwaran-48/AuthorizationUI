@@ -5,6 +5,7 @@ import Loading from '../../utility/Loading';
 import { Common } from '../../utility/Common';
 import BackButton from '../../utility/BackButton';
 import { Form } from 'react-router-dom';
+import ErrorComp from '../../utility/ErrorComp';
 
 export const clientAppSingleViewLoader = ({params}) => {
   const response = ClienAPI.getClient(params.id);
@@ -87,7 +88,10 @@ const ClientAppSingleView = () => {
         name={<i className="fa fa-solid fa-arrow-left"></i>} 
         isRelativeToPath={true} />
       <Suspense fallback={<Loading />}>
-        <Await resolve={clientsLoaderData.client}>
+        <Await 
+          resolve={clientsLoaderData.client}
+          errorElement={<ErrorComp />}
+        >
           {renderClient}
         </Await>
       </Suspense>
