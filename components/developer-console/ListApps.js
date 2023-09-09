@@ -62,8 +62,9 @@ const ListApps = () => {
                                 clients.map(clientApp =>{
                                     return (
                                         <Link 
-                                            key={clientApp.clientId} 
-                                            to={`./${clientApp.clientId}`}>
+                                            key={clientApp.clientId}
+                                            preventScrollReset={true}
+                                            to={clientApp.clientId}>
                                             <ClientApp 
                                                 name={clientApp.clientName} 
                                                 id={clientApp.clientId}
@@ -74,7 +75,9 @@ const ListApps = () => {
                                 })
                                 : null;
         return (
-            clientAppElems || <h1>You have no client apps</h1>
+            <div className="developer-console-list-app x-axis-flex">
+                {clientAppElems || <h1>You have no client apps</h1>}
+            </div>
         )
     }
 
@@ -82,13 +85,11 @@ const ListApps = () => {
 
     return (
         <div className="developer-console-child x-axis-flex">
-            <div className="developer-console-list-app x-axis-flex">
-                <Suspense fallback={<Loading />}>
-                    <Await resolve={clientsLoaderData.clients}>
-                        {renderClients}
-                    </Await>
-                </Suspense>
-            </div>
+            <Suspense fallback={<Loading />}>
+                <Await resolve={clientsLoaderData.clients}>
+                    {renderClients}
+                </Await>
+            </Suspense>
         </div>
     )
 }

@@ -44,5 +44,31 @@ export const ClienAPI = {
                                     },
                                 });
         return response;
+    },
+    getClient: async id => {
+        const routes = await ServerAPIManager.getAppRoutes();
+        const url = routes.client.base + "/" + id;
+
+        const response = await fetch(url, {
+                                headers: {
+                                    "Content-Type": "application/json"
+                                }
+                            });
+        return await response.json();
+    },
+    updateClient: async data => {
+        const routes = await ServerAPIManager.getAppRoutes();
+        const url = routes.client.base + "/" + data.clientId;
+        const csrfToken = Cookies.get("XSRF-TOKEN");
+
+        const response = await fetch(url, {
+                                    method: "PUT",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        "X-XSRF-TOKEN": csrfToken
+                                    },
+                                    body: JSON.stringify(data)
+                                });
+        return response;
     }
 }

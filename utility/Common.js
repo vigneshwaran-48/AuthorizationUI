@@ -74,11 +74,6 @@ export const Common = {
             id: "developer-console-nav-elem-2",
             name: "Create",
             link: "create"
-        },
-        {
-            id: "developer-console-nav-elem-3",
-            name: "Update",
-            link: "update"
         }
     ],
 

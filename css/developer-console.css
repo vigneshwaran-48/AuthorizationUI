@@ -65,7 +65,7 @@
 .developer-console-list-app {
     width: 100%;
     height: fit-content;
-    justify-content: center;
+    justify-content: space-between;
     flex-wrap: wrap;
     align-items: flex-start;
     display: grid;
@@ -79,10 +79,11 @@
     justify-content: space-around;
     align-items: center;
     margin-right: 10px;
-    margin-top: 10px;
+    margin-top: 30px;
     position: relative;
     text-decoration: none;
     color: black;
+    transition: 0.5s;
 }
 .client-app > img {
     width: 180px;
@@ -104,8 +105,45 @@
     cursor: pointer;
 }
 
+.client-app-single-view {
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    overflow: scroll;
+}
+.client-app-single-view::-webkit-scrollbar {
+    display: none;
+}
+.client-app-single-view-image-container {
+    width: 100%;
+    height: 30%;
+    align-items: center;
+}
+.client-app-single-view-image-container > img {
+    height: 100%;
+}
+.client-app-single-view-bottom-container {
+    width: 100%;
+    height: 70%;
+}
+.client-app-single-view-bottom-container span {
+    font-weight: 700;
+    font-size: 18px;
+    margin-right: 5px;
+}
+.client-app-single-view-bottom-container > p {
+    margin: 10px 0px;
+    align-items: center;
+}
+.client-app-single-view-button-container-update-button {
+    color: white;
+    background-color: rgb(96,98,105);
+    max-width: 500px;
+}
 
-
+.client-app:hover {
+    transform: scale(1.1);
+}
 
 
 
@@ -146,7 +184,13 @@
 }
 @media screen and (max-width: 565px)  {
     .developer-console-list-app {
-        grid-template-columns: auto ;
+        grid-template-columns: auto;
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 500px)  {
+    .client-app-single-view-image-container {
+        justify-content: center;
     }
 }
 @media screen and (max-width: 310px)  {

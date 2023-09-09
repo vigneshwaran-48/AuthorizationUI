@@ -17,9 +17,8 @@ from "./components/PersonalInfo";
 import DeveloperConsole, { developerLoaderData }  from "./components/DeveloperConsole";
 import ListApps, { listAppsAction, listAppsLoader }  from "./components/developer-console/ListApps";
 import CreateApp, { createAppAction }  from "./components/developer-console/CreateApp.js";
-import UpdateApp  from "./components/developer-console/UpdateApp";
 import { AppProvider } from "./AppProvider";
-import ClientAppSingleView from "./components/developer-console/ClientAppSingleView";
+import ClientAppSingleView, { clientAppSingleViewAction, clientAppSingleViewLoader } from "./components/developer-console/ClientAppSingleView";
 import Loading from "./utility/Loading";
 
 const route = createBrowserRouter(
@@ -55,13 +54,14 @@ const route = createBrowserRouter(
                 <Route 
                     path="list/:id" 
                     element={<ClientAppSingleView />}
+                    loader={clientAppSingleViewLoader}
+                    action={clientAppSingleViewAction}
                 />
                 <Route 
                     path="create" 
                     element={<CreateApp />}
                     action={createAppAction}
                 />
-                <Route path="update" element={<UpdateApp />} />
             </Route>
         </Route>
     )

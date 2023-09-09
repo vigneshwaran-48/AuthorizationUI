@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Common } from "../utility/Common";
 import "../css/accounts.css";
 import SideNav from "../components/SideNav";
-import { Outlet, useLoaderData } from "react-router";
-import useApp from "../AppProvider";
-import { ServerAPIManager } from "../utility/AppRoutes";
+import { Outlet } from "react-router";
 
 
 export const accountsLoader = async ({ params }) => {
