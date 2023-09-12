@@ -30,9 +30,10 @@ export const personalInfoAction = async ({ params, request }) => {
     return UserAPI.updateUser(data);
 }
 const formatDate = (year, month, day) => {
-    day = day.slice(0, 2);
-    month = month.slice(0, 2);
-    year = year.slice(0, 4);
+    console.log(year, month, day);
+    day = day?.toString().slice(0, 2);
+    month = month?.toString().slice(0, 2);
+    year = year?.toString().slice(0, 4);
     return Common.checkAndGiveDoubleDigit(year) + "-" + 
            Common.checkAndGiveDoubleDigit(month) + "-" +
            Common.checkAndGiveDoubleDigit(day);
@@ -41,7 +42,7 @@ const formatDayJsDate = dayJsDate => {
     let {$D, $y, $M} = dayJsDate;
     console.log($D, $M, $y);
 
-    return formatDate($D, $M, $y);               
+    return formatDate($y, $M, $D);               
 }
 
 const fieldLengthObj = {
