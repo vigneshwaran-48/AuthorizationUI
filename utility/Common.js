@@ -13,7 +13,7 @@ let successPopupTimeoutId = -1;
 export const Common = {
 
     appName: "ProApp",
-    appDomain: "http://127.0.0.1:9292",
+    appDomain: "",
     appIcon: "/app-icon.png",
 
     accountsSideNav: [

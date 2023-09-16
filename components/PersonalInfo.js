@@ -23,14 +23,12 @@ export const personalInfoAction = async ({ params, request }) => {
 
     const splittedDate = data.dob.split("-");
     if(splittedDate) {
-        console.log(splittedDate);
         data.dob = formatDate(...splittedDate);
     }
 
     return UserAPI.updateUser(data);
 }
 const formatDate = (year, month, day) => {
-    console.log(year, month, day);
     day = day?.toString().slice(0, 2);
     month = month?.toString().slice(0, 2);
     year = year?.toString().slice(0, 4);
@@ -40,8 +38,6 @@ const formatDate = (year, month, day) => {
 }
 const formatDayJsDate = dayJsDate => {
     let {$D, $y, $M} = dayJsDate;
-    console.log($D, $M, $y);
-
     return formatDate($y, $M, $D);               
 }
 
@@ -105,7 +101,7 @@ const PersonalInfo = () => {
                 ...prevUserDetails,
                 dob: formatDayJsDate(newValue)
             }
-        })
+        });
     }
 
     const handleImageChange = async event => {
